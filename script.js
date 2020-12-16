@@ -1,10 +1,9 @@
 var expenseList = [];
-var id = 0;
 
 function addExpense() {
+    var id = expenseList.length
     var { expenseName, expenseDate, expenseAmount } = getFields();
     expenseList.push([id, expenseName, expenseDate, expenseAmount])
-    id += 1;
     clearFields();
     generateList();
 
@@ -27,19 +26,34 @@ function clearFields() {
 }
 
 function generateList() {
+    var expenseTable = "";
     for ( let expense in expenseList ) {
+        var expenseId = expenseList[expense][0]
         var expenseName = expenseList[expense][1]
         var expenseDate = expenseList[expense][2]
         var expenseAmount = expenseList[expense][3]
-        var expenseTable = document.getElementById("main-table").innerHTML
-        expenseTable = 
-        `${expenseTable}
+        expenseTable = `${expenseTable}
         <tr>
             <td>${expenseName}</td>
             <td>${expenseDate}</td>
-            <td>${expenseAmount}</td>
+            <td>${expenseAmount}
+            <button class="delete-button" onclick="deleteExpense(${expenseId})">x</button></td>
         </tr>
         `
     }
-    document.getElementById("main-table").innerHTML = expenseTable
+    document.getElementById("expense-table").innerHTML = 
+    `<tr><th>Name</th><th>Date</th><th>Amount</th></tr>${expenseTable}`
+}
+
+function deleteExpense(expenseId) {
+    var newList = expenseList
+    .filter( expense => expense[0] != expenseId );
+    expenseList = [];
+    id = 0;
+    for ( expense in newList ) {
+        expenseList.push( [id, newList[expense][1],
+            newList[expense][2], newList[expense][3]] )
+        id += 1;
+    }
+    generateList();
 }

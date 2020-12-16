@@ -45,7 +45,7 @@ input {
     border: solid 1px rgb(219, 217, 217);
     padding: 5px;
 }
-button {
+#add-expense-button {
     color: white;
     background-color: green;
     padding: 0.5rem;
@@ -75,4 +75,14 @@ label {
 }
 .input-row-1, .input-row-2 {
     margin-bottom: 1rem;
+}
+.delete-button {
+    color: white;
+    font-size: 0.6rem;
+    background-color: green;
+    width: 1rem;
+    height: 1rem;
+    border: none;
+    border-radius: 0.2rem;
+    float: right;
 }
